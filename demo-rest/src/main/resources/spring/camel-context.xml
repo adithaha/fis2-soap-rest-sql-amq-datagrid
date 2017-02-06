@@ -14,7 +14,7 @@
     <cxf:rsServer address="/employeeRS" id="employeeRS"
         loggingFeatureEnabled="true" serviceClass="org.jboss.fis2.demo.rest.EmployeeRS">
         <cxf:providers>
-        	<ref bean="jsonProvider"/>
+            <ref bean="jsonProvider"/>
         </cxf:providers>
     </cxf:rsServer>
     <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
@@ -45,35 +45,33 @@
             <convertBodyTo id="_convertBodyTo2" type="org.jboss.fis2.demo.soap.Employee"/>
         </route>
         <route id="getEmployeeList">
-            <from uri="direct:getEmployeeList"/>
-            <setBody>
+            <from id="_from4" uri="direct:getEmployeeList"/>
+            <setBody id="_setBody2">
                 <simple>${body[0]}</simple>
             </setBody>
-            <convertBodyTo type="java.lang.String"/>
-            <setHeader headerName="operationNamespace">
+            <convertBodyTo id="_convertBodyTo4" type="java.lang.String"/>
+            <setHeader headerName="operationNamespace" id="_setHeader3">
                 <constant>http://soap.demo.fis2.jboss.org/</constant>
             </setHeader>
-            <to uri="cxf:bean:employeeWS"/>
-            <convertBodyTo type="org.jboss.fis2.demo.soap.EmployeeList"/>
-        </route>
-        <route id="addEmployee">
-            <from uri="direct:addEmployee"/>
-            <convertBodyTo type="org.jboss.fis2.demo.soap.Employee"/>
-            <setHeader headerName="operationNamespace">
-                <constant>http://soap.demo.fis2.jboss.org/</constant>
-            </setHeader>
-            <to uri="cxf:bean:employeeWS"/>
-            <convertBodyTo type="org.jboss.fis2.demo.soap.Employee"/>
+            <to id="_to3" uri="cxf:bean:employeeWS"/>
+            <convertBodyTo id="_convertBodyTo5" type="org.jboss.fis2.demo.soap.EmployeeList"/>
         </route>
         <route id="addEmployeeBulk">
-            <from uri="direct:addEmployeeBulk"/>
-            <convertBodyTo type="org.jboss.fis2.demo.soap.EmployeeList"/>
-            <setHeader headerName="operationNamespace">
+            <from id="_from6" uri="direct:addEmployeeBulk"/>
+            <convertBodyTo id="_convertBodyTo8" type="org.jboss.fis2.demo.soap.EmployeeList"/>
+            <setHeader headerName="operationNamespace" id="_setHeader5">
                 <constant>http://soap.demo.fis2.jboss.org/</constant>
             </setHeader>
-            <to uri="cxf:bean:employeeWS"/>
-            <convertBodyTo type="org.jboss.fis2.demo.soap.EmployeeList"/>
+            <to id="_to5" uri="cxf:bean:employeeWS"/>
+            <convertBodyTo id="_convertBodyTo9" type="org.jboss.fis2.demo.soap.EmployeeList"/>
         </route>
-        
+        <route id="addEmployeeBulkAsync">
+            <from id="_from5" uri="direct:addEmployeeBulkAsync"/>
+            <convertBodyTo id="_convertBodyTo6" type="org.jboss.fis2.demo.soap.EmployeeList"/>
+            <to id="_to4" pattern="InOnly" uri="amq:queue:addEmployeeBulk"/>
+            <setBody id="_setBody3">
+                <constant>Request is accepted</constant>
+            </setBody>
+        </route>
     </camelContext>
 </beans>

@@ -36,6 +36,14 @@ public class EmployeeRS {
     	return null;
     }
 
+	@POST
+    @Path("/addemployeebulkasync")
+    public String addEmployeeBulkAsync(
+        org.jboss.fis2.demo.soap.EmployeeList arg0
+    ) {
+    	return null;
+    }
+	
 	@GET
     @Path("/getemployeeall")
     public org.jboss.fis2.demo.soap.EmployeeList getEmployeeAll() {
