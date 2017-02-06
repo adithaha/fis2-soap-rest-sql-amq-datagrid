@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:camel="http://camel.apache.org/schema/spring"
+    xmlns:cxf="http://camel.apache.org/schema/cxf"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd http://camel.apache.org/schema/cxf     http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+    <!-- Camel Routes -->
+    <cxf:cxfEndpoint address="${url.employeeWS}" id="employeeWS" serviceClass="org.jboss.fis2.demo.soap.EmployeeWSPortType">
+        <cxf:properties>
+            <entry key="dataFormat" value="POJO"/>
+            <entry key="faultStackTraceEnabled" value="true"/>
+            <entry key="loggingFeatureEnabled" value="true"/>
+        </cxf:properties>
+    </cxf:cxfEndpoint>
+    <cxf:rsServer address="/employeeRS" id="employeeRS"
+        loggingFeatureEnabled="true" serviceClass="org.jboss.fis2.demo.rest.EmployeeRS">
+        <cxf:providers>
+        	<ref bean="jsonProvider"/>
+        </cxf:providers>
+    </cxf:rsServer>
+    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+        <route id="employeeRS">
+            <from id="_from1" uri="cxfrs:bean:employeeRS"/>
+            <recipientList id="_recipientList1">
+                <simple>direct:${header.operationName}</simple>
+            </recipientList>
+        </route>
+        <route id="getEmployeeAll">
+            <from id="_from2" uri="direct:getEmployeeAll"/>
+            <setHeader headerName="operationNamespace" id="_setHeader1">
+                <constant>http://soap.demo.fis2.jboss.org/</constant>
+            </setHeader>
+            <to id="_to1" uri="cxf:bean:employeeWS"/>
+            <convertBodyTo id="_convertBodyTo1" type="org.jboss.fis2.demo.soap.EmployeeList"/>
+        </route>
+        <route id="getEmployee">
+            <from id="_from3" uri="direct:getEmployee"/>
+            <setBody id="_setBody1">
+                <simple>${body[0]}</simple>
+            </setBody>
+            <convertBodyTo id="_convertBodyTo3" type="java.lang.Integer"/>
+            <setHeader headerName="operationNamespace" id="_setHeader2">
+                <constant>http://soap.demo.fis2.jboss.org/</constant>
+            </setHeader>
+            <to id="_to2" uri="cxf:bean:employeeWS"/>
+            <convertBodyTo id="_convertBodyTo2" type="org.jboss.fis2.demo.soap.Employee"/>
+        </route>
+        <route id="getEmployeeList">
+            <from uri="direct:getEmployeeList"/>
+            <setBody>
+                <simple>${body[0]}</simple>
+            </setBody>
+            <convertBodyTo type="java.lang.String"/>
+            <setHeader headerName="operationNamespace">
+                <constant>http://soap.demo.fis2.jboss.org/</constant>
+            </setHeader>
+            <to uri="cxf:bean:employeeWS"/>
+            <convertBodyTo type="org.jboss.fis2.demo.soap.EmployeeList"/>
+        </route>
+        <route id="addEmployee">
+            <from uri="direct:addEmployee"/>
+            <convertBodyTo type="org.jboss.fis2.demo.soap.Employee"/>
+            <setHeader headerName="operationNamespace">
+                <constant>http://soap.demo.fis2.jboss.org/</constant>
+            </setHeader>
+            <to uri="cxf:bean:employeeWS"/>
+            <convertBodyTo type="org.jboss.fis2.demo.soap.Employee"/>
+        </route>
+        <route id="addEmployeeBulk">
+            <from uri="direct:addEmployeeBulk"/>
+            <convertBodyTo type="org.jboss.fis2.demo.soap.EmployeeList"/>
+            <setHeader headerName="operationNamespace">
+                <constant>http://soap.demo.fis2.jboss.org/</constant>
+            </setHeader>
+            <to uri="cxf:bean:employeeWS"/>
+            <convertBodyTo type="org.jboss.fis2.demo.soap.EmployeeList"/>
+        </route>
+        
+    </camelContext>
+</beans>
