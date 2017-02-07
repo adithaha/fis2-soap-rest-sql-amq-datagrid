@@ -6,6 +6,7 @@
     <jaxb:bindings>
         <jaxb:globalBindings generateElementProperty="false">
         	<xjc:simple />
+        	<xjc:serializable uid="1" />
         </jaxb:globalBindings>
     </jaxb:bindings>
 </jaxb:bindings>

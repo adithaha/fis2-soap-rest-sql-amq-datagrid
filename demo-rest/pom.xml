@@ -46,6 +46,10 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
+      <artifactId>camel-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
       <artifactId>camel-spring-boot-starter</artifactId>
     </dependency>
     <dependency>
@@ -60,7 +64,29 @@
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-jbossdatagrid</artifactId>
       <version>${org.jboss.datagrid.version}</version>
+      <exclusions>
+      	<exclusion>
+          <groupId>org.infinispan</groupId>
+          <artifactId>infinispan-embedded</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.infinispan</groupId>
+          <artifactId>infinispan-query-dsl</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.infinispan</groupId>
+          <artifactId>infinispan-commons</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.jboss.logmanager/jboss-logmanager -->
+<dependency>
+    <groupId>org.jboss.logmanager</groupId>
+    <artifactId>jboss-logmanager</artifactId>
+    <version>1.5.6.Final-redhat-1</version>
+</dependency>
+
+
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
@@ -83,7 +109,6 @@
       <artifactId>fabric8-arquillian</artifactId>
       <scope>test</scope>
     </dependency>
-    
   </dependencies>
   <build>
     <testResources>
