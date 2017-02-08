@@ -56,6 +56,15 @@
             <to id="_to3" uri="cxf:bean:employeeWS"/>
             <convertBodyTo id="_convertBodyTo5" type="org.jboss.fis2.demo.soap.EmployeeList"/>
         </route>
+        <route id="addEmployee">
+            <from id="_from8" uri="direct:addEmployee"/>
+            <convertBodyTo id="_convertBodyTo11" type="org.jboss.fis2.demo.soap.Employee"/>
+            <setHeader headerName="operationNamespace" id="_setHeader9">
+                <constant>http://soap.demo.fis2.jboss.org/</constant>
+            </setHeader>
+            <to id="_to9" uri="cxf:bean:employeeWS"/>
+            <convertBodyTo id="_convertBodyTo12" type="org.jboss.fis2.demo.soap.Employee"/>
+        </route>
         <route id="addEmployeeBulk">
             <from id="_from6" uri="direct:addEmployeeBulk"/>
             <convertBodyTo id="_convertBodyTo8" type="org.jboss.fis2.demo.soap.EmployeeList"/>
@@ -73,7 +82,7 @@
                 <constant>Request is accepted</constant>
             </setBody>
         </route>
-        <route id="_route1">
+        <route id="getEmployeeAll">
             <from id="_from7" uri="direct:getEmployeeAll"/>
             <setHeader headerName="CamelInfinispanOperation" id="_setHeader4">
                 <constant>CamelInfinispanOperationGet</constant>
@@ -87,11 +96,18 @@
                     <simple>${header.CamelInfinispanOperationResult} == null</simple>
                     <log id="_log1" message="not found in cache, get response from SOAP webservice"/>
                     <to id="_to7" uri="direct:getEmployeeAllWS"/>
+                    <convertBodyTo id="_convertBodyTo7" type="java.lang.String"/>
                     <setHeader headerName="CamelInfinispanOperation" id="_setHeader7">
                         <constant>CamelInfinispanOperationPut</constant>
                     </setHeader>
                     <setHeader headerName="CamelInfinispanValue" id="_setHeader8">
                         <simple>${body}</simple>
+                    </setHeader>
+                    <setHeader headerName="CamelInfinispanLifespanTime" id="_setHeader10">
+                        <constant>{{jdg.lifespan}}</constant>
+                    </setHeader>
+                    <setHeader headerName="CamelInfinispanTimeUnit" id="_setHeader11">
+                        <constant>{{jdg.timeunit}}</constant>
                     </setHeader>
                     <to id="_to8" uri="infinispan://{{jdg.hosts}}"/>
                 </when>
@@ -100,6 +116,7 @@
                     <setBody id="_setBody4">
                         <simple>${header.CamelInfinispanOperationResult}</simple>
                     </setBody>
+                    <convertBodyTo id="_convertBodyTo10" type="org.jboss.fis2.demo.soap.EmployeeList"/>
                 </otherwise>
             </choice>
         </route>
