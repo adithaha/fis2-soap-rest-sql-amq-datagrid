@@ -27,37 +27,3 @@ CREATE TABLE phone
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-
-CREATE TABLE public.employee
-(
-  id integer NOT NULL DEFAULT nextval('employee_id_seq'::regclass),
-  address character varying(255),
-  name character varying(255),
-  CONSTRAINT employee_pkey PRIMARY KEY (id )
-)
-WITH (
-  OIDS=FALSE
-);
-ALTER TABLE public.employee
-  OWNER TO postgres;
-
--- Table: public.phone
-
--- DROP TABLE public.phone;
-
-CREATE TABLE public.phone
-(
-  id integer NOT NULL DEFAULT nextval('phone_id_seq'::regclass),
-  employee_id integer,
-  phone character varying(255),
-  type character varying(255),
-  CONSTRAINT phone_pkey PRIMARY KEY (id ),
-  CONSTRAINT fk_hbvecruwjtpc6u53ujlmjpvtw FOREIGN KEY (employee_id)
-      REFERENCES public.employee (id) MATCH Unknown
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-)
-WITH (
-  OIDS=FALSE
-);
-ALTER TABLE public.phone
-  OWNER TO postgres;

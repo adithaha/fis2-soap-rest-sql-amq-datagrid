@@ -12,16 +12,3 @@ postgresql
 POSTGRESQL_USER=postgres
 POSTGRESQL_PASSWORD=postgres
 POSTGRESQL_DATABASE=fis2demo
-
-spec:
-  ports:
-    - name: 5432-tcp
-      protocol: TCP
-      port: 5432
-      targetPort: 5432
-      nodePort: 30432
-  selector:
-    deploymentconfig: postgresql
-  clusterIP: 172.30.109.137
-  type: NodePort
-  sessionAffinity: None
