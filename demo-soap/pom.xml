@@ -23,6 +23,13 @@
     <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
   </properties>
+	
+  <repositories>
+    <repository>
+      <id>tools-nexus3</id>
+      <url>http://nexus3-tools.192.168.124.18.nip.io/repository/maven-public/</url>
+    </repository>
+ </repositories>
 
   <dependencyManagement>
     <dependencies>
