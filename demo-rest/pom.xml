@@ -9,8 +9,8 @@
   <description>Spring Boot example running a Camel route connecting to ActiveMQ</description>
   <properties>
     <spring-boot.version>1.4.1.RELEASE</spring-boot.version>
-    <fabric8.version>2.2.170.redhat-000010</fabric8.version>
-    <fabric8.maven.plugin.version>3.1.80.redhat-000010</fabric8.maven.plugin.version>
+    <fabric8.version>2.2.170.redhat-000022</fabric8.version>
+    <fabric8.maven.plugin.version>3.1.80.redhat-000022</fabric8.maven.plugin.version>
     <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
     <org.jboss.datagrid.version>6.5.1.Final-redhat-1</org.jboss.datagrid.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
