@@ -14,8 +14,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- maven plugin versions -->
-    <fabric8.version>2.2.170.redhat-000010</fabric8.version>
-    <fabric8.maven.plugin.version>3.1.80.redhat-000010</fabric8.maven.plugin.version>
+    <fabric8.version>2.2.170.redhat-000022</fabric8.version>
+    <fabric8.maven.plugin.version>3.1.80.redhat-000022</fabric8.maven.plugin.version>
     
     <!-- configure the versions you want to use here -->
     <spring-boot.version>1.4.1.RELEASE</spring-boot.version>
@@ -24,13 +24,6 @@
     <maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
   </properties>
 	
-  <repositories>
-    <repository>
-      <id>tools-nexus3</id>
-      <url>http://nexus3-tools.192.168.124.18.nip.io/repository/maven-public/</url>
-    </repository>
- </repositories>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
