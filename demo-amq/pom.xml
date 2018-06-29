@@ -8,12 +8,15 @@
   <name>Fabric8 :: Quickstarts :: Spring Boot :: Camel and ActiveMQ</name>
   <description>Spring Boot example running a Camel route connecting to ActiveMQ</description>
   <properties>
-    <spring-boot.version>1.4.1.RELEASE</spring-boot.version>
-    <fabric8.version>2.2.170.redhat-000022</fabric8.version>
-    <fabric8.maven.plugin.version>3.1.80.redhat-000022</fabric8.maven.plugin.version>
-    <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
+    <spring-boot.version>1.5.12.RELEASE</spring-boot.version>
+    <fabric8.version>3.0.11.fuse-000039-redhat-1</fabric8.version>
+	<fabric8.maven.plugin.version>3.5.33.fuse-000067-redhat-1</fabric8.maven.plugin.version>
+    <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+    
+    <org.keycloak.bom.keycloak-adapter-bom.version>3.4.10.Final-redhat-1</org.keycloak.bom.keycloak-adapter-bom.version>
+    <org.jboss.datagrid.version>6.5.1.Final-redhat-1</org.jboss.datagrid.version>
+    
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -36,14 +39,6 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.activemq</groupId>
-      <artifactId>activemq-camel</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.activemq</groupId>
-      <artifactId>activemq-pool</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-spring-boot-starter</artifactId>
     </dependency>
@@ -53,11 +48,11 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-jaxb-starter</artifactId>
+      <artifactId>camel-amqp-starter</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-validator</artifactId>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-jaxb-starter</artifactId>
     </dependency>
     <dependency>
       <groupId>org.jboss.arquillian.junit</groupId>

@@ -28,7 +28,7 @@ import infinispan.org.jboss.logging.BasicLogger;
  * The Spring-boot main class.
  */
 @SpringBootApplication
-@ImportResource({"classpath:spring/amq.xml", "classpath:spring/json.xml", "classpath:spring/camel-context.xml"})
+@ImportResource({"classpath:spring/amqp-context.xml", "classpath:spring/json.xml", "classpath:spring/camel-context.xml"})
 public class Application {
 
     public static void main(String[] args) {

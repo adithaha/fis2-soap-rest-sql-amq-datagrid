@@ -77,7 +77,7 @@
         <route id="addEmployeeBulkAsync">
             <from id="_from5" uri="direct:addEmployeeBulkAsync"/>
             <convertBodyTo id="_convertBodyTo6" type="org.jboss.fis2.demo.soap.EmployeeList"/>
-            <to id="_to4" pattern="InOnly" uri="amq:queue:addEmployeeBulk"/>
+            <to id="_to4" pattern="InOnly" uri="amqp:queue:addEmployeeBulk"/>
             <setBody id="_setBody3">
                 <constant>Request is accepted</constant>
             </setBody>

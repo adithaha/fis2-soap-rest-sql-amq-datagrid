@@ -13,7 +13,7 @@
     </cxf:cxfEndpoint>
     <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
         <route id="amq">
-            <from id="_from7" uri="amq:queue:addEmployeeBulk"/>
+            <from id="_from7" uri="amqp:queue:addEmployeeBulk"/>
             <convertBodyTo id="_convertBodyTo10" type="org.jboss.fis2.demo.soap.EmployeeList"/>
             <setHeader headerName="operationNamespace" id="_setHeader6">
                 <constant>http://soap.demo.fis2.jboss.org/</constant>
