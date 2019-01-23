@@ -7,9 +7,9 @@
  <bean id="amqp" class="org.apache.camel.component.jms.JmsComponent">
         <property name="connectionFactory">
             <bean class="org.apache.qpid.jms.JmsConnectionFactory" >
-	            <constructor-arg index="0"  value="admin" />
-	            <constructor-arg index="1" value="admin" />
-	            <constructor-arg index="2" value="amqp://localhost:5672" />
+	            <constructor-arg index="0"  value="${amq.user}" />
+	            <constructor-arg index="1" value="${amq.pass}" />
+	            <constructor-arg index="2" value="${amq.url}" />
             </bean>
         </property>
     </bean>
